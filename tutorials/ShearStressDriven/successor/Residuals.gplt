@@ -1,0 +1,22 @@
+reset
+#set size 4,1
+#set multiplot layout 1, 2 
+
+set log y
+set grid
+set format y '%.0e';
+#set size 1,1
+set title "Residuals"
+set ylabel 'Residual'
+set xlabel 'Iteration'
+plot "< cat log.simpleFoam| grep 'Solving for Ux' | cut -d' ' -f9 | tr -d ','" title 'Ux' with lines,\
+     "< cat log.simpleFoam| grep 'Solving for Uz' | cut -d' ' -f9 | tr -d ','" title 'Uz' with lines,\
+     "< cat log.simpleFoam| grep 'Solving for omega' | cut -d' ' -f9 | tr -d ','" title 'omega' with lines,\
+     "< cat log.simpleFoam| grep 'Solving for k' | cut -d' ' -f9 | tr -d ','" title 'k' with lines#,\
+     #"< cat log.simpleFoam| grep 'Solving for Uy' | cut -d' ' -f9 | tr -d ','" title 'Uy' with lines
+
+
+#unset multiplot
+
+pause 5
+reread 
