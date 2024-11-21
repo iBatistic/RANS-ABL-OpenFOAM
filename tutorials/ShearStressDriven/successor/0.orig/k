@@ -37,7 +37,11 @@ boundaryField
 
     top
     {
-        type            zeroGradient;
+        type            fixedValue;
+        value		uniform $topK;
+        
+        // An alternative if the height of the domain is sufficient
+        //type            zeroGradient;
     }
 
     sides

@@ -10,41 +10,37 @@ FoamFile
     version     2.0;
     format      ascii;
     class       volScalarField;
-    object      epsilon;
+    object      nut;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-dimensions      [0 2 -3 0 0 0 0];
+dimensions      [0 2 -1 0 0 0 0];
 
-#include        "include/ABLConditions"
+#include      "include/ABLConditions"
  
-internalField   uniform $epsilonInit;
+internalField   uniform $nutInit;
 
 boundaryField
 {
     inlet
     {
-        type            atmBoundaryLayerInletEpsilon;
-        #include        "include/ABLConditions"
+        type            calculated;
         value           uniform 0;
     }
 
     ground
     {
-        type            atmEpsilonWallFunction;
-        Cmu             $Cmu;
+        type            atmNutkWallFunction;
         kappa           $kappa;
-        z0	        $z0;
-        value           $internalField;
+        Cmu             $Cmu;
+        z0              $z0;
+        value           uniform 0.0;
     }
 
     top
     {
-        type            fixedValue;
-        value		uniform $topEpsilon;
-        
-        // An alternative if the height of the domain is sufficient
-        //type            zeroGradient;
+        type            calculated;
+        value           uniform 0;
     }
 
     sides
@@ -54,9 +50,8 @@ boundaryField
 
     outlet
     {
-        type            inletOutlet;
-        inletValue      $internalField;
-        value           $internalField;
+        type            calculated;
+        value           uniform 0;
     }
 }
 

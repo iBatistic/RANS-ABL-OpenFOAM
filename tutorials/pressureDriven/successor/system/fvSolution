@@ -9,49 +9,58 @@ FoamFile
 {
     version     2.0;
     format      ascii;
-    class       volVectorField;
-    object      U;
+    class       dictionary;
+    object      fvSolution;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-dimensions      [0 1 -1 0 0 0 0];
-
-internalField   uniform (0 0 0);
-
-#include        "include/ABLConditions"
-
-boundaryField
+solvers
 {
-    inlet
+    p
     {
-        type            atmBoundaryLayerInletVelocity;
-        #include        "include/ABLConditions"
-        value           uniform (0 0 0);
+        solver           GAMG;
+        smoother         GaussSeidel;
+        tolerance        1e-8;
+        relTol           0.01;
     }
 
-    ground
+    "(U|k|epsilon|omega)"
     {
-        type            noSlip;
+        solver           smoothSolver;
+        smoother         GaussSeidel;
+        tolerance        1e-8;
+        relTol           0.01;
     }
+}
 
-    top
-    {
-        type            fixedShearStress;
-        tau             $topSS;
-        value           uniform (0 0 0);
-    }
+SIMPLE
+{
+    nNonOrthogonalCorrectors 0;
+    consistent               true;
+    //pRefCell                 0;
+    //pRefValue                0;
 
-    sides
-    {
-        type            empty;
-    }
+    //residualControl
+    //{
+    //    p               1e-5;
+    //    U               1e-7;
+    //    "(k|omega|epsilon)"   1e-7;
+    //}
 
-    outlet
+}
+
+relaxationFactors
+{
+    equations
     {
-        type            inletOutlet;
-        inletValue      uniform (0 0 0);
-        value           $internalField;
+        U                    0.4;
+        "(k|epsilon|omega)"  0.4;
     }
+}
+
+cache
+{
+    grad(U);
 }
 
 

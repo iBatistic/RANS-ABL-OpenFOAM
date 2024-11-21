@@ -10,41 +10,38 @@ FoamFile
     version     2.0;
     format      ascii;
     class       volScalarField;
-    object      epsilon;
+    object      k;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-dimensions      [0 2 -3 0 0 0 0];
+dimensions      [0 2 -2 0 0 0 0];
 
-#include        "include/ABLConditions"
+ #include      "include/ABLConditions"
  
-internalField   uniform $epsilonInit;
+internalField   uniform $kInit;
 
 boundaryField
 {
     inlet
     {
-        type            atmBoundaryLayerInletEpsilon;
+        type            atmBoundaryLayerInletKPD;
         #include        "include/ABLConditions"
         value           uniform 0;
     }
 
     ground
     {
-        type            atmEpsilonWallFunction;
-        Cmu             $Cmu;
-        kappa           $kappa;
-        z0	        $z0;
-        value           $internalField;
+        type            kqRWallFunction;
+        value           uniform $kInit;
     }
 
     top
     {
-        type            fixedValue;
-        value		uniform $topEpsilon;
+        //type            fixedValue;
+        //value		uniform $topK;
         
         // An alternative if the height of the domain is sufficient
-        //type            zeroGradient;
+        type            zeroGradient;
     }
 
     sides

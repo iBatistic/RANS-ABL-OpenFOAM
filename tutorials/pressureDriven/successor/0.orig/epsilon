@@ -24,7 +24,7 @@ boundaryField
 {
     inlet
     {
-        type            atmBoundaryLayerInletEpsilon;
+        type            atmBoundaryLayerInletEpsilonPD;
         #include        "include/ABLConditions"
         value           uniform 0;
     }
@@ -40,11 +40,11 @@ boundaryField
 
     top
     {
-        type            fixedValue;
-        value		uniform $topEpsilon;
+        //type            fixedValue;
+        //value		uniform $topEpsilon;
         
         // An alternative if the height of the domain is sufficient
-        //type            zeroGradient;
+        type            zeroGradient;
     }
 
     sides

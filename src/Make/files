@@ -1,0 +1,27 @@
+/* Models */
+/*turbulenceModels/atmosphericTurbulentTransportModels.C*/
+
+
+/* Boundary conditions */
+derivedFvPatchFields/atmBoundaryLayerPD/atmBoundaryLayerPD.C
+derivedFvPatchFields/atmBoundaryLayerInletKPD/atmBoundaryLayerInletKPDFvPatchScalarField.C
+derivedFvPatchFields/atmBoundaryLayerInletVelocityPD/atmBoundaryLayerInletVelocityPDFvPatchVectorField.C
+derivedFvPatchFields/atmBoundaryLayerInletEpsilonPD/atmBoundaryLayerInletEpsilonPDFvPatchScalarField.C
+derivedFvPatchFields/atmBoundaryLayerInletOmegaPD/atmBoundaryLayerInletOmegaPDFvPatchScalarField.C
+
+
+/* Wall function BCs */
+wallFunctions = derivedFvPatchFields/wallFunctions
+
+/*$(wallFunctions)/atmAlphatkWallFunction/atmAlphatkWallFunctionFvPatchScalarField.C*/
+
+
+
+/* fvOptions */
+
+
+/* functionObjects */
+
+
+
+LIB = $(FOAM_USER_LIBBIN)/libUserAtmosphericModels
