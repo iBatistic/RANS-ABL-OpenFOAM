@@ -228,8 +228,8 @@ tmp<vectorField> atmBoundaryLayerPD::U(const vectorField& pCf) const
     (
         (uTau_/kappa_) *
         (
-            Foam::log((zDir()&pCf)/z0)
-          + Cu1_ * ((zDir()&pCf)/hd_)
+            Foam::log((zDir()&(pCf-groundMin))/z0)
+          + Cu1_ * ((zDir()&(pCf-groundMin))/hd_)
           + Cu2_ * Foam::pow((zDir()&(pCf-groundMin))/hd_, 2)
           + Cu3_ * Foam::pow((zDir()&(pCf-groundMin))/hd_, 3)
           + Cu4_ * Foam::pow((zDir()&(pCf-groundMin))/hd_, 4)
@@ -247,12 +247,12 @@ tmp<scalarField> atmBoundaryLayerPD::k(const vectorField& pCf) const
     const vector groundMin = (zDir() & ppMin_)*zDir();
 
     return
-        sqr(uTau_) *
+        Foam::sqr(uTau_) *
         (
             Ck1_
-          + Ck2_*(Foam::pow((1.0-(zDir()&(pCf-groundMin))), 2))
-          + Ck3_*(Foam::pow((1.0-(zDir()&(pCf-groundMin))), 4))
-          + Ck4_*(Foam::pow((1.0-(zDir()&(pCf-groundMin))), 6))
+          + Ck2_*(Foam::pow((1.0-(zDir()&(pCf-groundMin))/hd_), 2))
+          + Ck3_*(Foam::pow((1.0-(zDir()&(pCf-groundMin))/hd_), 4))
+          + Ck4_*(Foam::pow((1.0-(zDir()&(pCf-groundMin))/hd_), 6))
         );
 }
 

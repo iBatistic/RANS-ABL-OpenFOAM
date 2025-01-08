@@ -36,7 +36,7 @@ solvers
 SIMPLE
 {
     nNonOrthogonalCorrectors 0;
-    consistent               true;
+    consistent               false;
     //pRefCell                 0;
     //pRefValue                0;
     
@@ -51,11 +51,22 @@ SIMPLE
 
 relaxationFactors
 {
+
+    fields
+    {
+        p               0.3;
+    }
     equations
     {
-        U                    0.9;
+        U                    0.7;
         "(k|epsilon|omega)"  0.7;
     }
+    
+//    equations
+//    {
+//        U                    0.9;
+//        "(k|epsilon|omega)"  0.7;
+//    }
 }
 
 cache

@@ -17,11 +17,11 @@ Ck3		     -1.926;
 Ck4		     0.805;
 
 hd                   500;
-kappa                0.40;
+kappa                0.41;//0;
 Cmu                  0.09;
 flowDir              (1 0 0);
 zDir                 (0 0 1);
-uTau                 0.622;
+uTau                 0.64076;
 z0                   uniform 0.01;
 
 // Initial values
@@ -31,7 +31,7 @@ kInit	             0.5;
 epsilonInit          0.1;
 
 // Values at top boundary
-topVelocity          uniform (27.3 0 0);
+topVelocity          uniform (17.01276 0 0);
 
 
 // ************************************************************************* //
