@@ -17,11 +17,11 @@ Ck3		     -1.926;
 Ck4		     0.805;
 
 hd                   500;
-kappa                0.41;//0;
+kappa                0.4;
 Cmu                  0.09;
 flowDir              (1 0 0);
 zDir                 (0 0 1);
-uTau                 0.64076;
+uTau                 0.6252;
 z0                   uniform 0.01;
 
 // Initial values

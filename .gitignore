@@ -4,9 +4,8 @@
 # Ignore run folder
 run
 
-# Build log files
-log.Allwmake
-log.Allcheck
+# Ignore log files
+log.*
 
 # editor and misc backup files - anywhere
 *~

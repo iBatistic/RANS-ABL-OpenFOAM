@@ -9,31 +9,51 @@ FoamFile
 {
     version     2.0;
     format      ascii;
-    class       dictionary;
-    object      turbulenceProperties;
+    class       volScalarField;
+    object      nut;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-simulationType          RAS;
+dimensions      [0 2 -1 0 0 0 0];
 
-RAS
+#include      "include/ABLConditions"
+ 
+internalField   uniform $nutInit;
+
+boundaryField
 {
-    RASModel            kEpsilon;
-    //RASModel            kOmegaSST;
-
-    turbulence          on;
-
-    printCoeffs         on;
-
-    kEpsilonCoeffs     // Valid only for epsilon-based models
+    inlet
     {
-        Cmu         0.09;
-        C1          1.44;
-        C2          1.92;
+        type            calculated;
+        value           uniform 0;
+    }
 
-        // For kappa=0.4
-        sigmaEps    1.11;
+    ground
+    {
+        type            atmNutkWallFunction;
+        kappa           $kappa;
+        Cmu             $Cmu;
+        z0              $z0;
+        value           uniform 0.0;
+    }
+
+    top
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+
+    sides
+    {
+        type            empty;
+    }
+
+    outlet
+    {
+        type            calculated;
+        value           uniform 0;
     }
 }
+
 
 // ************************************************************************* //

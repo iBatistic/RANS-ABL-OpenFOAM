@@ -50,8 +50,6 @@ runTimeModifiable yes;
 functions
 {
     #include "sampleLines"
-    #include "sampleIso"
-    #include "samplePlanes"
 
     minMax
     {

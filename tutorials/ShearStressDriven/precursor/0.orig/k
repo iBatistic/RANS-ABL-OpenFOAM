@@ -9,31 +9,49 @@ FoamFile
 {
     version     2.0;
     format      ascii;
-    class       dictionary;
-    object      turbulenceProperties;
+    class       volScalarField;
+    object      k;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-simulationType          RAS;
+dimensions      [0 2 -2 0 0 0 0];
 
-RAS
+ #include      "include/ABLConditions"
+
+internalField   uniform $kInit;
+
+boundaryField
 {
-    RASModel            kEpsilon;
-    //RASModel            kOmegaSST;
-
-    turbulence          on;
-
-    printCoeffs         on;
-
-    kEpsilonCoeffs     // Valid only for epsilon-based models
+    inlet
     {
-        Cmu         0.09;
-        C1          1.44;
-        C2          1.92;
+        type            zeroGradient;
+    }
 
-        // For kappa=0.4
-        sigmaEps    1.11;
+    ground
+    {
+        type            kqRWallFunction;
+        value           uniform $kInit;
+    }
+
+    top
+    {
+        type            fixedValue;
+        value		uniform $topK;
+
+        // An alternative if the height of the domain is sufficient
+        //type            zeroGradient;
+    }
+
+    sides
+    {
+        type            empty;
+    }
+
+    outlet
+    {
+        type            zeroGradient;
     }
 }
+
 
 // ************************************************************************* //

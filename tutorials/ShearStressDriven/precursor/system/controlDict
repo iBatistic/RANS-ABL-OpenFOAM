@@ -10,30 +10,57 @@ FoamFile
     version     2.0;
     format      ascii;
     class       dictionary;
-    object      turbulenceProperties;
+    object      controlDict;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-simulationType          RAS;
+// Make sure all utilities know specialised models
+libs            (atmosphericModels);
 
-RAS
+application     simpleFoam;
+
+startFrom       startTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         30000;
+
+deltaT          1;
+
+writeControl    timeStep;
+
+writeInterval   500;
+
+purgeWrite      1;
+
+writeFormat     ascii;
+
+writePrecision  12;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable yes;
+
+functions
 {
-    RASModel            kEpsilon;
-    //RASModel            kOmegaSST;
+    #include "sampleLines"
+    #include "sampleIso"
+    #include "samplePlanes"
 
-    turbulence          on;
-
-    printCoeffs         on;
-
-    kEpsilonCoeffs     // Valid only for epsilon-based models
+    minMax
     {
-        Cmu         0.09;
-        C1          1.44;
-        C2          1.92;
-
-        // For kappa=0.4
-        sigmaEps    1.11;
+        type            fieldMinMax;
+        libs            (fieldFunctionObjects);
+        fields          (U);
+        writeControl    writeTime;
     }
 }
+
 
 // ************************************************************************* //

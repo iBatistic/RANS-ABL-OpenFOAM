@@ -10,30 +10,13 @@ FoamFile
     version     2.0;
     format      ascii;
     class       dictionary;
-    object      turbulenceProperties;
+    object      transportProperties;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-simulationType          RAS;
+transportModel  Newtonian;
 
-RAS
-{
-    RASModel            kEpsilon;
-    //RASModel            kOmegaSST;
+nu              1.5e-05;
 
-    turbulence          on;
-
-    printCoeffs         on;
-
-    kEpsilonCoeffs     // Valid only for epsilon-based models
-    {
-        Cmu         0.09;
-        C1          1.44;
-        C2          1.92;
-
-        // For kappa=0.4
-        sigmaEps    1.11;
-    }
-}
 
 // ************************************************************************* //

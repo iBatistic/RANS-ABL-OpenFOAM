@@ -28,12 +28,17 @@ else
 
 fi
 
+
 # Create plots
 if command -v gnuplot &> /dev/null
 then
     echo "Generating diagrams using gnuplot"
-    gnuplot plotProfiles.gnuplot &> /dev/null
-    gnuplot Residuals.gnuplot &> /dev/null
+    gnuplot k.gnuplot &> /dev/null
+    gnuplot nut.gnuplot &> /dev/null
+    gnuplot epsilon.gnuplot &> /dev/null
+    gnuplot U.gnuplot &> /dev/null
+    gnuplot omega.gnuplot &> /dev/null
 else
     echo "Please install gnuplot if you would like to generate the plots"
 fi
+
