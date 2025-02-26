@@ -1,23 +1,17 @@
-reset
-#set size 4,1
-#set multiplot layout 1, 2
+set term pdfcairo dashed enhanced
 
 set log y
 set grid
 set format y '%.0e';
-#set size 1,1
+set size ratio 0.7
 set title "Residuals"
 set ylabel 'Residual'
 set xlabel 'Iteration'
+set output "Residuals.pdf"
+
 plot "< cat log.simpleFoam| grep 'Solving for Ux' | cut -d' ' -f9 | tr -d ','" title 'Ux' with lines,\
      "< cat log.simpleFoam| grep 'Solving for Uz' | cut -d' ' -f9 | tr -d ','" title 'Uz' with lines,\
-     "< cat log.simpleFoam| grep 'Solving for Uz' | cut -d' ' -f9 | tr -d ','" title 'Uz' with lines,\
+     "< cat log.simpleFoam| grep 'Solving for omega' | cut -d' ' -f9 | tr -d ','" title 'omega' with lines,\
      "< cat log.simpleFoam| grep 'Solving for p' | cut -d' ' -f9 | tr -d ','" title 'p' with lines,\
-     "< cat log.simpleFoam| grep 'Solving for k' | cut -d' ' -f9 | tr -d ','" title 'k' with lines#,\
-     #"< cat log.simpleFoam| grep 'Solving for Uy' | cut -d' ' -f9 | tr -d ','" title 'Uy' with lines
-
-
-#unset multiplot
-
-pause 5
-reread
+     "< cat log.simpleFoam| grep 'Solving for k' | cut -d' ' -f9 | tr -d ','" title 'k' with lines,\
+     "< cat log.simpleFoam| grep 'Solving for epsilon' | cut -d' ' -f9 | tr -d ','" title 'epsilon' with lines
