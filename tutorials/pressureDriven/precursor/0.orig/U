@@ -9,54 +9,43 @@ FoamFile
 {
     version     2.0;
     format      ascii;
-    class       dictionary;
-    object      controlDict;
+    class       volVectorField;
+    object      U;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-// Make sure all utilities know specialised models
-libs            (atmosphericModels libUserAtmosphericModels);
+dimensions      [0 1 -1 0 0 0 0];
 
-application     simpleFoam;
+internalField   uniform (0 0 0);
 
-startFrom       startTime;
+#include        "include/ABLConditions"
 
-startTime       0;
-
-stopAt          endTime;
-
-endTime         5000;
-
-deltaT          1;
-
-writeControl    timeStep;
-
-writeInterval   500;
-
-purgeWrite      1;
-
-writeFormat     ascii;
-
-writePrecision  12;
-
-writeCompression off;
-
-timeFormat      general;
-
-timePrecision   6;
-
-runTimeModifiable yes;
-
-functions
+boundaryField
 {
-    #include "sampleLines"
-
-    minMax
+    inlet
     {
-        type            fieldMinMax;
-        libs            (fieldFunctionObjects);
-        fields          (U);
-        writeControl    writeTime;
+        type            zeroGradient;
+    }
+
+    ground
+    {
+        type            noSlip;
+    }
+
+    top
+    {
+        type            fixedValue;
+        value           $topVelocity;
+    }
+
+    sides
+    {
+        type            empty;
+    }
+
+    outlet
+    {
+        type            zeroGradient;
     }
 }
 

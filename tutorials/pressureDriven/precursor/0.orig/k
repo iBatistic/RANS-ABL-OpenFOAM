@@ -9,54 +9,47 @@ FoamFile
 {
     version     2.0;
     format      ascii;
-    class       dictionary;
-    object      controlDict;
+    class       volScalarField;
+    object      k;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-// Make sure all utilities know specialised models
-libs            (atmosphericModels libUserAtmosphericModels);
+dimensions      [0 2 -2 0 0 0 0];
 
-application     simpleFoam;
+ #include      "include/ABLConditions"
+ 
+internalField   uniform $kInit;
 
-startFrom       startTime;
-
-startTime       0;
-
-stopAt          endTime;
-
-endTime         5000;
-
-deltaT          1;
-
-writeControl    timeStep;
-
-writeInterval   500;
-
-purgeWrite      1;
-
-writeFormat     ascii;
-
-writePrecision  12;
-
-writeCompression off;
-
-timeFormat      general;
-
-timePrecision   6;
-
-runTimeModifiable yes;
-
-functions
+boundaryField
 {
-    #include "sampleLines"
-
-    minMax
+    inlet
     {
-        type            fieldMinMax;
-        libs            (fieldFunctionObjects);
-        fields          (U);
-        writeControl    writeTime;
+        type            zeroGradient;
+    }
+
+    ground
+    {
+        type            kqRWallFunction;
+        value           uniform $kInit;
+    }
+
+    top
+    {
+        //type            fixedGradient;
+        //value		uniform $topKGradient;
+        
+        // An alternative if the height of the domain is sufficient
+        type            zeroGradient;
+    }
+
+    sides
+    {
+        type            empty;
+    }
+
+    outlet
+    {
+        type            zeroGradient;
     }
 }
 

@@ -1,0 +1,39 @@
+#!/bin/bash
+cd "${0%/*}" || exit
+. ${WM_PROJECT_DIR:?}/bin/tools/RunFunctions
+
+restore0Dir
+
+if [ ! -d constant/polyMesh ]
+then
+    runApplication blockMesh
+
+    runApplication renumberMesh -overwrite -constant
+
+    runApplication checkMesh -allTopology -allGeometry -constant
+fi
+
+
+if [[ "$1" == "parallel" ]]; then
+
+    runApplication decomposePar
+
+    runParallel $(getApplication)
+
+    runApplication reconstructPar
+
+else
+
+    runApplication $(getApplication)
+
+fi
+
+# Create plots
+if command -v gnuplot &> /dev/null
+then
+    echo "Generating diagrams using gnuplot"
+    gnuplot plotProfiles.gnuplot &> /dev/null
+    gnuplot Residuals.gnuplot &> /dev/null
+else
+    echo "Please install gnuplot if you would like to generate the plots"
+fi

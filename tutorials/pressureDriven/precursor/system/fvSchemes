@@ -10,54 +10,55 @@ FoamFile
     version     2.0;
     format      ascii;
     class       dictionary;
-    object      controlDict;
+    object      fvSchemes;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-// Make sure all utilities know specialised models
-libs            (atmosphericModels libUserAtmosphericModels);
-
-application     simpleFoam;
-
-startFrom       startTime;
-
-startTime       0;
-
-stopAt          endTime;
-
-endTime         5000;
-
-deltaT          1;
-
-writeControl    timeStep;
-
-writeInterval   500;
-
-purgeWrite      1;
-
-writeFormat     ascii;
-
-writePrecision  12;
-
-writeCompression off;
-
-timeFormat      general;
-
-timePrecision   6;
-
-runTimeModifiable yes;
-
-functions
+ddtSchemes
 {
-    #include "sampleLines"
+    default             steadyState;
+}
 
-    minMax
-    {
-        type            fieldMinMax;
-        libs            (fieldFunctionObjects);
-        fields          (U);
-        writeControl    writeTime;
-    }
+gradSchemes
+{
+    default             Gauss linear;
+}
+
+divSchemes
+{
+    default             none;
+
+    div(phi,U)          bounded Gauss linear;
+    //div(phi,U)          bounded GammaV 1.0;
+    
+    turbulence          bounded Gauss limitedLinear 1;
+    //turbulence	bounded Gauss Gamma 1.0;
+    
+    div(phi,epsilon)    $turbulence;
+    div(phi,omega)      $turbulence;
+    div(phi,k)          $turbulence;
+
+    div((nuEff*dev2(T(grad(U)))))    Gauss linear;
+}
+
+laplacianSchemes
+{
+    default             Gauss linear uncorrected;
+}
+
+interpolationSchemes
+{
+    default             linear;
+}
+
+snGradSchemes
+{
+    default             uncorrected;
+}
+
+wallDist
+{
+    method              meshWave;
 }
 
 

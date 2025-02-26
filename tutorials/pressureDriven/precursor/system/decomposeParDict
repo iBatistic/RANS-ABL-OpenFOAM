@@ -10,54 +10,17 @@ FoamFile
     version     2.0;
     format      ascii;
     class       dictionary;
-    object      controlDict;
+    object      decomposeParDict;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-// Make sure all utilities know specialised models
-libs            (atmosphericModels libUserAtmosphericModels);
+numberOfSubdomains 8;
 
-application     simpleFoam;
+method             hierarchical;
 
-startFrom       startTime;
-
-startTime       0;
-
-stopAt          endTime;
-
-endTime         5000;
-
-deltaT          1;
-
-writeControl    timeStep;
-
-writeInterval   500;
-
-purgeWrite      1;
-
-writeFormat     ascii;
-
-writePrecision  12;
-
-writeCompression off;
-
-timeFormat      general;
-
-timePrecision   6;
-
-runTimeModifiable yes;
-
-functions
+coeffs
 {
-    #include "sampleLines"
-
-    minMax
-    {
-        type            fieldMinMax;
-        libs            (fieldFunctionObjects);
-        fields          (U);
-        writeControl    writeTime;
-    }
+    n              (8 1 1);
 }
 
 
