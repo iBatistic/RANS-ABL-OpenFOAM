@@ -47,14 +47,13 @@ Each case directory contains necessary `constant`, `system`, and `0` folders wit
 
 ## **References**
 
-For more details on the methodology and theoretical background, refer to the paper:   Batistić et al., *Review of Atmospheric Boundary Layer Modeling Approaches with RANS*, OpenFOAM Journal, 2025.   If you use these OpenFOAM case files in your research or projects, please cite the paper. 
+For more details on the methodology and theoretical background, refer to the paper:   Batistić et al., *Review of Atmospheric Boundary Layer Modeling Approaches with RANS*, OpenFOAM Journal, 2025.   
+If you use these OpenFOAM case files in your research or projects, please cite the paper. 
 
 
 ## **Contributing**
 
 Contributions are welcome! Please open an issue or submit a pull request if you would like to improve the cases.
 
-Maintained by: Ivan Batistić
-Contact: ivan.batistic2@gmail.com
-
-### 
+Maintained by: Ivan Batistić  
+Contact: ivan.batistic2@gmail.com   
