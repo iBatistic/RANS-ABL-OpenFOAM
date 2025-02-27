@@ -16,8 +16,6 @@ set linestyle 4 lt 6 lw 2 ps 1.2 lc rgb "grey"
 ###############################################################################
 #                                Velocity profile
 ###############################################################################
-# Benchmark
-benchmark="../literature/Ux-RN-Fig11b"
 
 samplesCellAt0=sprintf("postProcessing/samples_u/%d/x_0mCell_U.xy", endTime)
 samplesCellAt5000=sprintf("postProcessing/samples_u/%d/x_5000mCell_U.xy", endTime)
@@ -34,16 +32,11 @@ set offset .05, .05
 
 plot \
     samplesCellAt0 u ($2/uRef):($1/zRef) t "OpenFOAM, x = 0 m" w l ls 1,\
-    samplesCellAt5000 u ($2/uRef):($1/zRef) t "OpenFOAM, x = 5000 m" w l ls 2,\
-    benchmark u ($1/uRef):($2/zRef) every 3 t "Richards and Norris (2015)" w lp ls 3
-
+    samplesCellAt5000 u ($2/uRef):($1/zRef) t "OpenFOAM, x = 5000 m" w l ls 2
 
 ###############################################################################
 #                                k profile
 ###############################################################################
-# Benchmark
-benchmark="../literature/k-RN-Fig11a"
-
 set output "k.pdf"
 set xrange [0:5]
 set yrange [0:50]
@@ -53,7 +46,7 @@ set key t r
 set ylabel "{/:Italic z} / {/:Italic z}_{ref}" font "Nimbus Roman,14"
 set xlabel "{/:Italic k} / {/:Italic u}_{{/Symbol t}}^2" font "Nimbus Roman,14"
 set offset .05, .05
-
+benchmark="../literature/k-RN-Fig11a"
 samplesCellAt0=sprintf("postProcessing/samples_k/%d/x_0mCell_k.xy", endTime)
 samplesCellAt5000=sprintf("postProcessing/samples_k/%d/x_5000mCell_k.xy", endTime)
 
@@ -63,6 +56,7 @@ plot \
     benchmark u ($1/uTau**2):(($2)/zRef) w lp t "Richards and Norris (2015), x = 0 m" ls 3 pointinterval 3,\
     benchmark u ($3/uTau**2):(($4)/zRef) w lp t "Richards and Norris (2015),\n x = 5000 m" ls 4 pointinterval 4
     
+
 ###############################################################################
 #                                epsilon profile
 ###############################################################################
