@@ -2,13 +2,13 @@
 
 # ABL-OpenFOAM
 
-This repository contains OpenFOAM case files for simulating the atmospheric boundary layer (ABL) using different modeling approaches.
+This repository contains OpenFOAM case files for simulating the neutrally stratified atmospheric boundary layer (ABL) using different modeling approaches.
 The case setups are designed for computational wind engineering applications, including urban wind studies, pollutant dispersion, and structural aerodynamics. 
 
 ## **Features** 
 
 - **shear stress-driven** ABL case;
-- Implementation of **pressure-driven**ABL, 
+- Implementation of **pressure-driven** ABL, 
 - Implementation of **body force-driven** ABL models. 
 - **Pre-configured boundary conditions** for successor and precursor domain techniques.  
 -  Example simulations for verification and validation. 
