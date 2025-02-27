@@ -7,7 +7,7 @@ The case setups are designed for computational wind engineering applications, in
 
 ## **Features** 
 
-- **shear stress-driven** ABL case;
+- **Shear stress-driven** ABL case;
 - Implementation of **pressure-driven** ABL, 
 - Implementation of **body force-driven** ABL models. 
 - **Pre-configured boundary conditions** for successor and precursor domain techniques.  
@@ -38,11 +38,11 @@ Navigate to the desired case folder, source OpenFOAM with `openfoam2312` and run
 
 ## **Case Descriptions**
 
-- **Shear Stress-Driven ABL**: Driven by a prescribed shear stress at the top boundary.
-- **Pressure-Driven ABL**: Uses a pressure gradient to sustain the flow.
-- **Body Force-Driven ABL**: Includes an additional forcing term to drive the flow.
+- **Shear Stress-Driven ABL**: `shearStressDriven` driven by a prescribed shear stress at the top boundary.
+- **Pressure-Driven ABL**: `pressureDriven`; uses a pressure gradient to sustain the flow.
+- **Body Force-Driven ABL**: `constantBodyForce` and `variableBodyForce`; includes an additional forcing term to drive the flow.
 
-Each case directory contains necessary `constant`, `system`, and `0` folders with proper boundary conditions.
+Each case directory contains successor and precursor cases with corresponding OpenFOAM case structure (`constant`, `system`, and `0` folders with proper boundary conditions).
 
 
 ## **References**
