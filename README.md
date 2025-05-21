@@ -12,14 +12,14 @@ The case setups are designed for computational wind engineering applications, in
 - Implementation of **body force-driven** ABL models. 
 - **Pre-configured boundary conditions** for successor and precursor domain techniques.  
 -  Example simulations for verification and validation. 
-- Compatible with OpenFOAM v2312 and later. 
+- Compatible with OpenFOAM v2406 and later. 
   
 
 ## Getting Started
 
 **Prerequisites** 
 
-- OpenFOAM v2312
+- OpenFOAM v2406
 - Linux environment (recommended)
 - ParaView for post-processing
 
@@ -33,7 +33,7 @@ cd ABL-OpenFOAM/src
 wmake libso
 ```
 
-Navigate to the desired case folder, source OpenFOAM with `openfoam2312` and run desired case using `./Allrun` command.
+Navigate to the desired case folder, source OpenFOAM with `openfoam2406` and run desired case using `./Allrun` command.
 
 
 ## **Case Descriptions**
@@ -47,7 +47,7 @@ Each case directory contains successor and precursor cases with corresponding Op
 
 ## **References**
 
-For more details on the methodology and theoretical background, refer to the paper:   Batistić et al., *Review of Atmospheric Boundary Layer Modeling Approaches with RANS*, OpenFOAM Journal, 2025.   
+For more details on the methodology and theoretical background, refer to the paper:   Batistić et al., *Steady RANS modeling of the atmospheric boundary layer: A systematic review and some practical guidelines*, OpenFOAM Journal, 2025.   
 If you use these OpenFOAM case files in your research or projects, please cite the paper. 
 
 
