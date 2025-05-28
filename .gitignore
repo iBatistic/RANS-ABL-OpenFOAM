@@ -4,6 +4,9 @@
 # Ignore run folder
 run
 
+# Ignore DS_Store file on macOS
+.DS_Store
+
 # Ignore log files
 log.*
 
