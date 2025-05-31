@@ -73,9 +73,7 @@ SourceFiles
     atmBoundaryLayerInletOmegaPDFvPatchScalarField.C
 
 Author
-    Ivan Batistić and Mihael Cindori,
-    Faculty of Mechanical Engineering and Naval Architecture,
-    University of Zagreb, 2024. All rights reserved.
+
 
 \*---------------------------------------------------------------------------*/
 

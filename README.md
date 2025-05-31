@@ -2,58 +2,112 @@
 
 # ABL-OpenFOAM
 
-This repository contains OpenFOAM case files for simulating the neutrally stratified atmospheric boundary layer (ABL) using different modeling approaches.
-The case setups are designed for computational wind engineering applications, including urban wind studies, pollutant dispersion, and structural aerodynamics. 
+Case files for simulating the neutrally stratified atmospheric boundary layer (ABL) using different modeling approaches. Based on a commonly used benchmark, they are intended for use in more complex simulations; such as structural aerodynamics, pollutant dispersion, or wind engineering. These setups serve as practical examples, particularly for researchers and engineers new to ABL modeling in OpenFOAM.
 
-## **Features** 
+## **Features**
 
-- **Shear stress-driven** ABL case;
-- Implementation of **pressure-driven** ABL, 
-- Implementation of **body force-driven** ABL models. 
-- **Pre-configured boundary conditions** for successor and precursor domain techniques.  
--  Example simulations for verification and validation. 
-- Compatible with OpenFOAM v2406 and later. 
-  
+- **Shear stress-driven** ABL model,
+- **Pressure-driven** ABL model,
+- **Body force-driven** ABL model.
+- **Pre-configured boundary conditions** for both successor and precursor domain techniques,
+-  Example simulations for verification and validation.
+- Compatible with **OpenFOAM v2406**.
+
 
 ## Getting Started
 
-**Prerequisites** 
+**Prerequisites**
 
 - OpenFOAM v2406
-- Linux environment (recommended)
-- ParaView for post-processing
+- Linux or MacOS environment
+- ParaView (for post-processing)
+- Gnuplot (for automated plotting)
 
 **Installation**
 
-Clone the repository using:
+Download and extract the case files to your working directory:
 
 ```bash
-git clone https://github.com:iBatistic/ABL-OpenFOAM.git
-cd ABL-OpenFOAM/src
-wmake libso
+tar -xzf ABL-OpenFOAM.tar.gz
 ```
 
-Navigate to the desired case folder, source OpenFOAM with `openfoam2406` and run desired case using `./Allrun` command.
+Alternatively, a more up-to-date version may be available in the ABL-OpenFOAM GitHub repository.
+
+Then source OpenFOAM and compile code in the `src/` directory:
+
+```
+cd ABL-OpenFOAM/src
+openfoam2406
+wmake
+```
+
+> Note: openfoam2406 is an alias for sourcing the etc/bashrc file of your OpenFOAM installation.
+
+## **Cases Structure**
+
+Three main directories represent the different ABL modeling approaches:
+
+```bash
+├── constantBodyForceDriven
+│   ├── literature
+│   ├── precursor
+│   └── successor
+├── pressureDriven
+│   ├── literature
+│   ├── precursor
+│   └── successor
+└── shearStressDriven
+    ├── literature
+    ├── precursor
+    └── successor
+```
+
+#### Description 
+
+- **`shearStressDriven/`**: flow driven by prescribed shear stress on the top boundary.
+- **`pressureDriven/`**: flow driven by a pressure gradient.
+- **`constantBodyForceDriven/`**: flow driven by an applied body force in the momentum equation.
+- **`successor/`** inlet profiles are explicitly defined; the outlet uses a Neumann condition. This setup can be applied directly the actual simulation.
+- **`precursor/`**  inlet and outlet patches use periodic boundary conditions. The resulting flow profiles are mapped to the actual simulation.
+- **`litearature/`** reference data from published studies, used for validation.
 
 
-## **Case Descriptions**
+The precursor/ directory contains two sub-methods:
 
-- **`shearStressDriven`**: driven by a prescribed shear stress at the top boundary.
-- **`pressureDriven`**: uses a pressure gradient to sustain the flow.
-- **`constantBodyForce`** and **`variableBodyForce`**: includes an additional forcing term to drive the flow.
+```
+├── precursor
+    ├── cyclicInletOutlet
+    └── zeroGradInletOutlet
+```
 
-Each case directory contains successor and precursor cases with corresponding OpenFOAM case structure (`constant`, `system`, and `0` folders with proper boundary conditions).
+- **`cyclicInletOutlet/`** uses cyclic boundary conditions at inlet and outlet
+- **`zeroGradInletOutlet/`** uses `zeroGradient` boundary conditions for flow profiles at inlet and outlet
 
+**Note:** Although zero-gradient conditions are justified due to horizontal homogeneity, they require more iterations for convergence:
 
-## **References**
+- Successor cases: ~few thousand iterations
+- Precursor (zero gradient): ~100,000 iterations
+- Precursor (cyclic): ~50,000 iterations
 
-For more details on the methodology and theoretical background, refer to the paper:   Batistić et al., *Steady RANS modeling of the atmospheric boundary layer: A systematic review and some practical guidelines*, OpenFOAM Journal, 2025.   
-If you use these OpenFOAM case files in your research or projects, please cite the paper. 
+## **Running the Case**
+
+Navigate to the desired case folder, source OpenFOAM and run case using `./Allrun` script
+
+```
+openfoam2406
+./Allrun
+```
+
+Optionally, case can be run in parallel using parallel keyword:
+```
+./Allrun parallel
+```
+
+Each case includes an `Allclean` script to clean up generated simulation data. If Gnuplot is installed, velocity and turbulence plots will be generated automatically, showing profiles near the inlet and outlet boundaries. Literature data will also be included in the plots for comparison.
 
 
 ## **Contributing**
 
-Contributions are welcome! Please open an issue or submit a pull request if you would like to improve the cases.
+Contributions are welcome! If you find issues, or would like to improve or extend these cases, please open an issue or submit a pull request to the ABL-OpenFOAM GitHub repository.
+If you use any part of this repository in your research or publication, please cite it appropriately.
 
-Maintained by: Ivan Batistić  
-Contact: ivan.batistic2@gmail.com   

@@ -1,7 +1,7 @@
 /*--------------------------------*- C++ -*----------------------------------*\
 | =========                 |                                                 |
 | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
-|  \\    /   O peration     | Version:  v2312                                 |
+|  \\    /   O peration     | Version:  v2406                                 |
 |   \\  /    A nd           | Website:  www.openfoam.com                      |
 |    \\/     M anipulation  |                                                 |
 \*---------------------------------------------------------------------------*/
@@ -14,7 +14,6 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-// Make sure all utilities know specialised models
 libs            (atmosphericModels libUserAtmosphericModels);
 
 application     simpleFoam;
@@ -49,16 +48,33 @@ runTimeModifiable yes;
 
 functions
 {
-    #include "sampleLines"
-
-    minMax
+    sample_lines
     {
-        type            fieldMinMax;
-        libs            (fieldFunctionObjects);
-        fields          (U);
-        writeControl    writeTime;
+	type                    sets;
+	libs                    (sampling);
+	setFormat               raw;
+	interpolationScheme     cell;
+	writeControl            writeTime;
+	enabled                 true;
+	fields                  (U k nut epsilon);
+	sets
+	(
+	    x_0mCell
+	    {
+		type        midPoint;
+		axis        z;
+		start       (5.0 50 0.05);
+		end         (5.0 50 499.9);
+	    }
+	    x_5000mCell
+	    {
+	     	type        midPoint;
+	     	axis        z;
+	     	start       (4995 50 0.05);
+	     	end         (4995 50 499.9);
+	    }
+        );
     }
 }
-
 
 // ************************************************************************* //

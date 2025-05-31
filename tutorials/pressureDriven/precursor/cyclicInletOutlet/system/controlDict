@@ -1,0 +1,80 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2406                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+libs            (atmosphericModels libUserAtmosphericModels);
+
+application     simpleFoam;
+
+startFrom       startTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         50000;
+
+deltaT          1;
+
+writeControl    timeStep;
+
+writeInterval   500;
+
+purgeWrite      1;
+
+writeFormat     ascii;
+
+writePrecision  12;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable yes;
+
+functions
+{
+    sample_lines
+    {
+	type                    sets;
+	libs                    (sampling);
+	setFormat               raw;
+	interpolationScheme     cell;
+	writeControl            writeTime;
+	enabled                 true;
+	fields                  (U k nut epsilon);
+	sets
+	(
+	    x_0mCell
+	    {
+		type        midPoint;
+		axis        z;
+		start       (5.0 50 0.05);
+		end         (5.0 50 499.9);
+	    }
+	    x_5000mCell
+	    {
+	     	type        midPoint;
+	     	axis        z;
+	     	start       (4995 50 0.05);
+	     	end         (4995 50 499.9);
+	    }
+        );
+    }
+}
+
+// ************************************************************************* //

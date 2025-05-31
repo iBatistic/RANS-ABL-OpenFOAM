@@ -1,0 +1,27 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2406                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+hd                   500;
+kappa                0.4;
+Cmu                  0.09;
+flowDir              (1 0 0);
+zDir                 (0 0 1);
+uTau                 0.6252;
+z0                   uniform 0.01;
+
+// Initial values
+omegaInit            0.005;
+nutInit              0;
+kInit	             0.5;
+epsilonInit          0.1;
+
+// Values at top boundary
+topVelocity          uniform (17.01276 0 0);
+
+
+// ************************************************************************* //
