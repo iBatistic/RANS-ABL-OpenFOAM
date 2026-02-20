@@ -1,0 +1,33 @@
+#!/bin/bash
+cd "${0%/*}" || exit  # Run from this directory
+
+# Stop at first error
+set -e
+
+# Check if OpenFOAM has been sourced
+if [[ -z "${WM_PROJECT}" ]]
+then
+    echo "Please source the OpenFOAM/FOAM bashrc first!"
+    exit 1
+fi
+
+# Compile library
+echo "Building src/"
+(cd src/ && wmake $* 2>&1 | tee log.Allwmake)
+
+# Check if the build succeeded
+echo; echo "Checking if the installation was a success:"
+N_ERRORS_1=$(find . -name log.Allwmake | xargs grep " Error " | wc -l)
+N_ERRORS_2=$(find . -name log.Allwmake | xargs grep " Stop." | wc -l)
+if [[ $N_ERRORS_1 -gt 0 ]] || [[ $N_ERRORS_2 -gt 0 ]]
+then
+    echo "** BUILD ERROR **"
+    echo "There were build errors in the following logs:"
+    echo $(find . -name log.Allwmake | xargs grep -l " Error ")
+    echo $(find . -name log.Allwmake | xargs grep -l " Stop.")
+    echo; echo "Please examine these logs for additional details"; echo
+    exit 1
+else
+    echo "There were no build errors!"; echo
+fi
+echo

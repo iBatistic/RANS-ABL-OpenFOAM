@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# Check if OpenFOAM has been sourced
+if [[ -z "${WM_PROJECT}" ]]
+then
+    echo "Please source the OpenFOAM/FOAM bashrc first!"
+    exit 1
+fi
+
+echo "Cleaning backup files"
+find . -type f \( -name "*~" -o -name "*.bak" \) -exec rm {} \;
+find . \( -name 'core' -o -name 'core.[1-9]*' \) -exec rm {} \;
+find . \( -name '*.pvs' -o -name '*.foam' \) -exec rm {} \;
+rm logs > /dev/null 2>&1
+rm testLoopReport > /dev/null 2>&1
+
+echo ""
+
+foamCleanTutorials -self
+
+# ----------------------------------------------------------------- end-of-file

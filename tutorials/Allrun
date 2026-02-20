@@ -1,0 +1,45 @@
+#!/bin/bash
+#------------------------------------------------------------------------------
+# License
+#     Licensed under GNU General Public
+#     License <http://www.gnu.org/licenses/>.
+#
+# Script
+#     Alltest
+#
+# Description
+#     Run all the tutorials.
+#     Adapted from Alltest.
+#
+#------------------------------------------------------------------------------
+cd "${0%/*}" || exit  # Run from this directory
+set -e
+
+# Check if OpenFOAM has been sourced
+if [[ -z "${WM_PROJECT}" ]]
+then
+    echo "Please source the OpenFOAM/FOAM bashrc first!"
+    exit 1
+fi
+
+MODE=$1
+
+for approach in shearStressDriven pressureDriven constantBodyForceDriven
+do
+    for case in $(find $approach -type f -name Allrun)
+    do
+        caseDir=$(dirname $case)
+        echo
+        echo "Running case: $caseDir"
+
+        cd $caseDir
+
+        if [ "$MODE" = "parallel" ]; then
+            ./Allrun parallel
+        else
+            ./Allrun
+        fi
+
+        cd - > /dev/null
+    done
+done
