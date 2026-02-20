@@ -2,7 +2,7 @@
 
 # RANS-ABL-OpenFOAM
 
-**Modelling of the atmospheric boundary layer (ABL) using Reynolds-averaged Navier–Stokes (RANS) equations in OpenFOAM**
+**Modelling of the Atmospheric Boundary Layer (ABL) using Reynolds-averaged Navier–Stokes (RANS) equations in OpenFOAM**
 
 This repository accompanies the OpenFOAM® Journal article: 
 
