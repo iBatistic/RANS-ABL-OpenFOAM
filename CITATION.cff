@@ -1,0 +1,69 @@
+cff-version: 1.2.0
+title: "Steady RANS modeling of the atmospheric boundary layer: A systematic review and some practical guidelines"
+message: "If you use this repository, please cite the associated journal article."
+type: software
+
+authors:
+  - family-names: Batistić
+    given-names: Ivan
+    affiliation:
+      - Faculty of Mechanical Engineering and Naval Architecture, University of Zagreb
+
+  - family-names: Cindori
+    given-names: Mihael
+    affiliation:
+      - Ecodica d.o.o.
+      - Faculty of Mechanical Engineering and Naval Architecture, University of Zagreb
+
+  - family-names: Krizmanić
+    given-names: Severino
+    affiliation:
+      - Faculty of Mechanical Engineering and Naval Architecture, University of Zagreb
+
+  - family-names: Džijan
+    given-names: Ivo
+    affiliation:
+      - Faculty of Mechanical Engineering and Naval Architecture, University of Zagreb
+
+  - family-names: Juretić
+    given-names: Franjo
+    affiliation:
+      - Creative Fields d.o.o.
+
+  - family-names: Škvorc
+    given-names: Petar
+    affiliation:
+      - Faculty of Mechanical Engineering and Naval Architecture, University of Zagreb
+      - Faculty of Organization and Informatics, University of Zagreb
+
+  - family-names: Kozmar
+    given-names: Hrvoje
+    affiliation:
+      - Faculty of Mechanical Engineering and Naval Architecture, University of Zagreb
+
+repository-code: "https://github.com/iBatistic/RANS-ABL-OpenFOAM"
+license: "GPL-3.0-or-later"
+date-released: 2025-05-21
+version: "1.0.0"
+
+preferred-citation:
+  type: article
+  title: "Steady RANS modeling of the atmospheric boundary layer: A systematic review and some practical guidelines"
+  authors:
+    - family-names: Batistić
+      given-names: Ivan
+    - family-names: Cindori
+      given-names: Mihael
+    - family-names: Krizmanić
+      given-names: Severino
+    - family-names: Džijan
+      given-names: Ivo
+    - family-names: Juretić
+      given-names: Franjo
+    - family-names: Škvorc
+      given-names: Petar
+    - family-names: Kozmar
+      given-names: Hrvoje
+  journal: "OpenFOAM® Journal"
+  doi: "10.51560/ofj.v6.166"
+  year: 2025
