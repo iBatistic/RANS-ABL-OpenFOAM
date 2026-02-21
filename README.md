@@ -162,5 +162,18 @@ The generated PDF files from automated post-processing can be located, for examp
 
 ## **Contributing**
 
-Contributions are welcome! If you find issues, or would like to improve or extend these cases, please open an issue or submit a pull request to the [RANS-ABL-OpenFOAM](https://github.com/iBatistic/RANS-ABL-OpenFOAM) GitHub repository. If you use any part of this repository in your research or publication, please cite it appropriately.
+Contributions are welcome! If you find issues, or would like to improve or extend these cases, please open an issue or submit a pull request to the [RANS-ABL-OpenFOAM](https://github.com/iBatistic/RANS-ABL-OpenFOAM) GitHub repository. 
+If you use any part of this repository in your research or publication, please cite it appropriately.
 
+## Disclaimer
+
+This offering is not approved or endorsed by OpenCFD Limited, producer and
+distributor of the OpenFOAM software via
+[www.openfoam.com](https://www.openfoam.com), and owner of the OPENFOAM® and
+OpenCFD® trade marks.
+
+## Acknowledgements
+
+OPENFOAM® is a registered trademark of OpenCFD Limited, producer and
+distributor of the OpenFOAM software via
+[www.openfoam.com](https://www.openfoam.com).
