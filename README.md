@@ -17,6 +17,7 @@ The case files provided here reproduce and support the numerical setups discusse
 - **Pressure-driven** ABL model,
 - **Constant body force-driven** ABL model.
 - **Pre-configured boundary conditions** for both successor and precursor domain techniques,
+- **Application tutorials** with objects of interest (for example, buildings) placed in the ABL,
 -  Example simulations for verification and validation.
 - Compatible with **OpenFOAM v2406**.
 
@@ -29,6 +30,7 @@ The case files provided here reproduce and support the numerical setups discusse
 - OpenFOAM v2406
 - Linux or MacOS environment
 - ParaView (for post-processing)
+- cfMesh (only for the application tutorials)
 - Gnuplot (for automated plotting)
 
 **Installation**
@@ -58,9 +60,19 @@ cd RANS-ABL-OpenFOAM
 
 
 
+## **Repository Structure**
+
+```bash
+├── src                    # custom boundary conditions (pressure-driven ABL inlet profiles)
+├── tutorials              # ABL cases in an empty domain, used for verification and validation
+└── applicationTutorials   # cases with objects of interest (for example, buildings) placed in the ABL
+```
+
+
+
 ## **Tutorial Cases Structure**
 
-Three main directories represent the different ABL modeling approaches:
+Inside the `tutorials` directory, three main directories represent the different ABL modeling approaches:
 
 ```bash
 ├── constantBodyForceDriven
@@ -110,6 +122,23 @@ Simulations involving buildings, terrain, or other objects of interest should us
 For the shear stress-driven and pressure-driven ABL approaches, analytical inlet profiles are available. The successor cases use these prescribed analytical profiles and can therefore be executed independently. Precursor cases are also provided for the shear stress-driven and pressure-driven approaches. If executed, the precursor simulations converge to the same velocity and turbulence profiles that are analytically prescribed in the successor setups. In this sense, running the precursor is optional and mainly serves as a consistency check.
 
 For the constant body-force-driven ABL approach, no analytical inlet profiles are available. Therefore, a precursor simulation must be executed first to generate converged inflow profiles. Any successor simulation in this case depends on the profiles obtained from the precursor run.
+
+
+
+## **Application Tutorials**
+
+The `applicationTutorials` directory contains cases in which an object of interest is added to one of the ABL setups from the `tutorials` directory. Each case has its own subdirectory and its own `README.md`, which lists the ABL modeling approach, the domain technique and the ABL settings that are used.
+
+```bash
+└── applicationTutorials
+    └── flowBetweenBuildings
+```
+
+| Case | ABL modeling approach | Technique | Description |
+|---|---|---|---|
+| `flowBetweenBuildings` | shear stress-driven | successor | Three-dimensional flow around a tall building next to a symmetry plane, which represents two buildings separated by a narrow gap. The mesh is generated with cfMesh and the force on the building is monitored. Contributed by Petar Turčić. |
+
+Each application tutorial is run from its own directory with `./Allrun` or `./Allrun parallel` and cleaned with `./Allclean`. The application tutorials are not run by the `Allrun` script in the `tutorials` directory.
 
 
 

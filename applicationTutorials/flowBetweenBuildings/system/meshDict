@@ -1,0 +1,160 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                |
+| \\      /  F ield         | cfMesh: A library for mesh generation          |
+|  \\    /   O peration     |                                                |
+|   \\  /    A nd           | Author: Franjo Juretic                         |
+|    \\/     M anipulation  | E-mail: franjo.juretic@c-fields.com            |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    version   2.0;
+    format    ascii;
+    class     dictionary;
+    location  "system";
+    object    meshDict;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+surfaceFile "domain_edges.fms";
+writeFormat ascii;
+maxCellSize 20;
+
+automaticRefinement
+{
+}
+
+surfaceMeshRefinement
+{
+}
+
+objectRefinements
+{
+    box1
+    {
+        type            box;
+        cellSize        1;
+        centre          (60 -2.5 0);
+        lengthX         135;
+        lengthY         80;
+        lengthZ         120;
+        refinementThickness 1;
+    }
+
+    box2
+    {
+        type            box;
+        cellSize        5;
+        centre          (95 -2.5 0);
+        lengthX         220;
+        lengthY         100;
+        lengthZ         134;
+        refinementThickness 1;
+    }
+
+    box3
+    {
+        type            box;
+        cellSize        10;
+        centre          (125 -2.5 0);
+        lengthX         2000;
+        lengthY         1000;
+        lengthZ         200;
+        refinementThickness 1;
+    }
+}
+
+
+edgeMeshRefinement
+{
+
+}
+
+boundaryLayers
+{
+    excludedPatches (inlet outlet top bottom left right);
+
+    patchBoundaryLayers
+    {
+
+        building
+        {
+            nLayers 3;
+            thicknessRatio 1.2;
+            allowDiscontinuity 0;
+            maxFirstLayerThickness 5;
+        }
+    }
+
+    optimiseLayer 1;
+
+    optimisationParameters
+    {
+        maxDeviationFromFaceNormal 70.0;
+        maxNumIterations 20;
+        maxRelDisplacement 0.05;
+        maxTwistAngle 70.0;
+        relThicknessTol 0.9;
+    }
+}
+
+localRefinement
+{
+}
+
+anisotropicSources
+{
+
+}
+
+renameBoundary
+{
+    newPatchNames
+    {
+        left
+        {
+            type    symmetry;
+            newName left;
+        }
+
+        right
+        {
+            type    symmetry;
+            newName right;
+        }
+
+        top
+        {
+            type    patch;
+            newName top;
+        }
+
+        inlet
+        {
+            type    patch;
+            newName inlet;
+        }
+
+        outlet
+        {
+            type    patch;
+            newName outlet;
+        }
+    }
+}
+
+workflowControls
+{
+//stopAfter templateGeneration;
+//stopAfter surfaceTopology;
+//stopAfter surfaceProjection;
+//stopAfter patchAssignment;
+//stopAfter edgeExtraction;
+//stopAfter boundaryLayerGeneration;
+//stopAfter meshOptimisation;
+//stopAfter boundaryLayerRefinement;
+//restartFromLatestStep 1;
+}
+
+// ************************************************************************* //

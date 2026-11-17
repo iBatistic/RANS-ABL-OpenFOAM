@@ -1,0 +1,50 @@
+#!/bin/bash
+cd "${0%/*}" || exit
+. ${WM_PROJECT_DIR:?}/bin/tools/RunFunctions
+
+# The mesh is generated with cfMesh
+if [ ! -d constant/polyMesh ] && ! command -v cartesianMesh &> /dev/null
+then
+    echo "cfMesh (cartesianMesh) not found: it is required to generate the mesh"
+    exit 1
+fi
+
+restore0Dir
+
+if [ ! -d constant/polyMesh ]
+then
+    # Merge the surfaces from the stl directory into a single file
+    cat stl/*.stl > domain.stl
+    runApplication surfaceToFMS domain.stl
+    #scaleSurfaceMesh domain.fms -o domain_scaled.fms -s 0.001
+    runApplication surfaceFeatureEdges -angle 45 domain.fms domain_edges.fms
+    runApplication cartesianMesh
+
+    runApplication renumberMesh -overwrite -constant
+
+    runApplication checkMesh -allTopology -allGeometry -constant
+fi
+
+if [[ "$1" == "parallel" ]]; then
+
+    runApplication decomposePar
+
+    runParallel $(getApplication)
+
+    runApplication reconstructPar
+
+else
+
+    runApplication $(getApplication)
+
+fi
+
+# Create plots
+if command -v gnuplot &> /dev/null
+then
+    echo "Generating diagrams using gnuplot"
+    gnuplot Forces.gnuplot &> /dev/null
+    gnuplot Residuals.gnuplot &> /dev/null
+else
+    echo "Please install gnuplot if you would like to generate the plots"
+fi

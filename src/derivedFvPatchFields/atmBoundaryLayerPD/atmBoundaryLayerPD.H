@@ -73,7 +73,7 @@ Description
     \f]
 
     \f[
-        \omega = \frac{ k(z)^2}{\kappa u_{\tau} z} \left( 1
+        \omega = \frac{k(z)}{\kappa u_{\tau} z} \left( 1
             + (1+C_{U1})\left(\frac{z}{H}\right)
             + (1+C_{U1}+2C_{U2})\left(\frac{z}{H}\right)^2
             + (1+C_{U1}+2C_{U2}+3C_{U3})\left(\frac{z}{H}\right)^3  \right)

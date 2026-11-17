@@ -1,0 +1,23 @@
+solid top
+  facet normal -0 -0 1
+    outer loop
+      vertex 132.5 -2.5 300
+      vertex -250 -270 300
+      vertex 515 -270 300
+    endloop
+  endfacet
+  facet normal 0 0 1
+    outer loop
+      vertex 515 -270 300
+      vertex 515 -2.5 300
+      vertex 132.5 -2.5 300
+    endloop
+  endfacet
+  facet normal -0 0 1
+    outer loop
+      vertex -250 -270 300
+      vertex 132.5 -2.5 300
+      vertex -250 -2.5 300
+    endloop
+  endfacet
+endsolid top

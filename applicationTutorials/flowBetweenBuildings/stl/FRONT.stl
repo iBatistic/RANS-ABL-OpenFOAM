@@ -1,0 +1,23 @@
+solid inlet
+  facet normal 1 -0 0
+    outer loop
+      vertex -250 -2.5 150
+      vertex -250 -270 300
+      vertex -250 -270 0
+    endloop
+  endfacet
+  facet normal 1 -0 0
+    outer loop
+      vertex -250 -270 0
+      vertex -250 -2.5 0
+      vertex -250 -2.5 150
+    endloop
+  endfacet
+  facet normal 1 0 0
+    outer loop
+      vertex -250 -270 300
+      vertex -250 -2.5 150
+      vertex -250 -2.5 300
+    endloop
+  endfacet
+endsolid inlet
